@@ -15,21 +15,6 @@ db_config = {
 def home():
     return render_template('blood.html')
 
-@app.route('/data')
-def get_data():
-    connection = mysql.connector.connect(**db_config)
-    cursor = connection.cursor(dictionary=True)
-
-    select_data_query = "SELECT * FROM blood_donation2"
-    cursor.execute(select_data_query)
-
-    data = cursor.fetchall()
-
-    cursor.close()
-    connection.close()
-
-    return render_template('data.html', data=data)
-
 @app.route('/submit',methods=['POST'])
 def Submit_data():
     if request.method=='POST':
